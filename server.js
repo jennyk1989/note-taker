@@ -43,7 +43,7 @@ app.post('/api/notes', (req, res) => {
 // receive a query parameter containing the id of a note to delete
 app.delete('/api/notes/:id', (req, res) => { // :id is the query parameter
     // read all notes from the db.json file 
-    let notesFile = fs.readFileSync('..db/db.json'); 
+    let notesFile = fs.readFileSync('db/db.json'); 
     // remove the note with the given id property
     const deleteNote = req.params.id;
     if (notes.id == deleteNote) {
