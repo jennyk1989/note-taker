@@ -12,7 +12,7 @@ router.get('/notes', (req, res) => {
 });
 
 // GET * should return the index.html file
-router.get('*', (req, res) => { // * = wildcard -> any route not defined will fall here
+router.get('/', (req, res) => { // * = / -> any route not defined will fall here
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
