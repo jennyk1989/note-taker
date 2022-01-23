@@ -1,3 +1,5 @@
+node_modules
+.DS_Store
 # http://www.gnu.org/software/automake
 
 Makefile.in
