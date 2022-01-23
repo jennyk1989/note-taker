@@ -18,7 +18,7 @@ router.post('/api/notes', (req, res) => {
     let newNote = req.body;
     notes.push(newNote);
     //give each note a unique id when it's saved
-    newNote.id = newID();
+    newNote.id = notes.length // length of notes will always change so id will be unique
     // add it to db.json file
     fs.writeFileSync(
         path.join(__dirname, "../db/db.json"), 
