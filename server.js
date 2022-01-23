@@ -40,12 +40,12 @@ app.post('/api/notes', (req, res) => {
 })
 //---------------------- HTML Routes ----------------------
 // GET /notes should return the notes.html file
-router.get('/notes', (req, res) => {
+app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
 // GET * should return the index.html file
-router.get('*', (req, res) => { // * = wildcard -> any route not defined will fall here
+app.get('*', (req, res) => { // * = wildcard -> any route not defined will fall here
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
