@@ -16,7 +16,7 @@ app.use(express.static('public')); //use to make files in public folder static
 
 //---------------------- API Routes ----------------------
 // read db.json file
-const notes = require("./db/db.json");
+const { notes } = require("./db/db.json");
 
 // GET /api/notes:
 app.get('/api/notes', (req, res) => {
@@ -33,11 +33,26 @@ app.post('/api/notes', (req, res) => {
     newNote.id = notes.length; //// length of notes will always change so id will be unique
     // add it to db.json file
     fs.writeFileSync(
-        path.join(__dirname, '/db/db.json'),
+        path.join(__dirname, './db/db.json'),
         JSON.stringify({ notes }, null, 2)
     );
     return newNote;
-})
+});
+
+// DELETE /api/notes:
+// receive a query parameter containing the id of a note to delete
+app.delete('/api/notes/:id', (req, res) => { // :id is the query parameter
+    // read all notes from the db.json file 
+    let notesFile = fs.readFileSync('..db/db.json'); 
+    // remove the note with the given id property
+    const deleteNote = req.params.id;
+    if (notes.id == deleteNote) {
+        const i = indexOf(notes);
+        notes.splice(i,1);
+    }
+    // rewrite the notes to the db.json file
+    fs.writeFileSync(notesFile, JSON.stringify(notes));
+});
 //---------------------- HTML Routes ----------------------
 // GET /notes should return the notes.html file
 app.get('/notes', (req, res) => {

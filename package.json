@@ -20,8 +20,5 @@
   "bugs": {
     "url": "https://github.com/jennyk1989/note-taker/issues"
   },
-  "homepage": "https://github.com/jennyk1989/note-taker#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  }
+  "homepage": "https://github.com/jennyk1989/note-taker#readme"
 }
