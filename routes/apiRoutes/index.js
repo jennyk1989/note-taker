@@ -1,4 +1,5 @@
 //import path and express/router packages
+const fs = require('fs');
 const path = require('path');
 const router = require('express').Router();
 
@@ -13,16 +14,31 @@ router.get('/api/notes', (req, res) => {
 
 // POST /api/notes ->
 router.post('/api/notes', (req, res) => {
-
+    // receive new note to save on req.body
+    let newNote = req.body;
+    notes.push(newNote);
     //give each note a unique id when it's saved
-    
-})
-// receive new note to save on req.body
+    newNote.id = newID();
+    // add it to db.json file
+    fs.writeFileSync(
+        path.join(__dirname, "../db/db.json"), 
+        JSON.stringify({ notes }, null, 2),
+        err => {
+            if (err) throw err;
+            // return new note to the client
+            res.json(newNote);
+        }
+    );
+});
 
-// add it to db.json file
+module.exports = router;
 
-// return new note to the client
-
-
-
+/* functions: 
+getNotes(), saveNote(), deleteNote(), 
+renderActiveNote(),
+handleNoteSave(), handleNoteDelete(), handleNoteView(),
+handleNewNoteView(), handleRenderSaveBtn()
+renderNoteList()
+getAndRenderNotes()
+*/
 
