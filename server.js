@@ -4,8 +4,6 @@ const app = express();
 
 //import other packages
 const path = require('path');
-const config= path.resolve(configFilePath);
-
 const fs = require('fs'); //file system package for reading & writing files
 
 //port (app to use environment variable (.env) if it's been set or default port to 3000)
