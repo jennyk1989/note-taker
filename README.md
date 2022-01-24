@@ -15,6 +15,8 @@ Note taker application deployed on a server.
 ## Usage
 Link to deployed application on [Heroku](https://evening-citadel-87158.herokuapp.com/)
 ### Screenshots
+Deployed application homepage:
+<img width="1166" alt="homepage" src="https://user-images.githubusercontent.com/92952780/150719882-5cf27020-8db8-477c-b5a1-bc11f49c2638.png">
 
 ## Licence 📃
 MIT License
