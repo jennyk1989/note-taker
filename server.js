@@ -16,26 +16,26 @@ app.use(express.static('public')); //use to make files in public folder static
 
 //---------------------- API Routes ----------------------
 // read db.json file
-const { notes } = require("./db/db.json");
+const { notesDB } = require("./db/db.json");
 
 // GET /api/notes:
 app.get('/api/notes', (req, res) => {
     // return all saved notes as JSON
-    res.json(notes); //response turned into JSON & saved as "notes"
+    res.json(notesDB); //response turned into JSON & saved in notes database
 });
 
 // POST /api/notes:
 app.post('/api/notes', (req, res) => {
     // receive new note to save on req.body
-    let newNote = req.body;
-    notes.push(newNote); //saves the new note on notes array
+    notesDB.push(req.body); //saves the new note in notes db by adding to the array
     // give each note a unique id when it's saved
-    newNote.id = notes.length; //// length of notes will always change so id will be unique
+    req.params.id = req.params.id + 1; //length of notes will change with each new note so id will be unique
     // add it to db.json file
-    fs.writeFileSync(
-        path.join(__dirname, './db/db.json'),
-        JSON.stringify({ notes }, null, 2)
-    );
+    fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notesDB), (err) => {
+        if (err) {
+            return console.log(err)
+        }
+    });
     return newNote;
 });
 
@@ -43,15 +43,21 @@ app.post('/api/notes', (req, res) => {
 // receive a query parameter containing the id of a note to delete
 app.delete('/api/notes/:id', (req, res) => { // :id is the query parameter
     // read all notes from the db.json file 
-    let notesFile = fs.readFileSync('db/db.json'); 
+    let notesFile = path.join(__dirname, './db/db.json'); 
     // remove the note with the given id property
     const deleteNote = req.params.id;
-    if (notes.id == deleteNote) {
-        const i = indexOf(notes);
-        notes.splice(i,1);
+    if (notesDB.id == deleteNote) {
+        const i = indexOf(notesDB);
+        notesDB.splice(i,1);
     }
     // rewrite the notes to the db.json file
-    fs.writeFileSync(notesFile, JSON.stringify(notes));
+    fs.writeFile(notesFile, JSON.stringify(notesDB), (err) => {
+        if (err) {
+            return console.log(err)
+        } else {
+            res.json(notesDB);
+        }
+    });
 });
 //---------------------- HTML Routes ----------------------
 // GET /notes should return the notes.html file

@@ -22,7 +22,7 @@ Server:
 "ctrl + c" to stop server
 Heroku:
 heroku create
-npm push heroku main 
+git push heroku main 
 heroku open 
 ### Screenshots
 

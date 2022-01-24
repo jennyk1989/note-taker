@@ -1,7 +1,7 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "![badge](https://img.shields.io/badge/License-MIT-blue) ## Description Note taker application deployed on a server. ## Table of Contents  * [Installation](#Installation) * [Usage](#Usage) * [License](#License) * [Contribution](#Contribution) * [Tests](#Tests) * [Questions](#Questions) ## Installation 📥 * Install Node.js  * Clone repository  ## Usage After installed... Express:  npm init -y npm i express Server: \"npm start\" to start server \"ctrl + c\" to stop server Heroku: heroku create npm push heroku main  heroku open  ### Screenshots",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
