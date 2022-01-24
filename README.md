@@ -10,20 +10,10 @@ Note taker application deployed on a server.
 * [Tests](#Tests)
 * [Questions](#Questions)
 ## Installation 📥
-* Install Node.js 
 * Clone repository 
+* Install Node.js and Express.js
 ## Usage
-After installed...
-Express: 
-npm init -y
-npm i express
-Server:
-"npm start" to start server
-"ctrl + c" to stop server
-Heroku:
-heroku create
-git push heroku main 
-heroku open 
+Link to deployed application on [Heroku](https://evening-citadel-87158.herokuapp.com/)
 ### Screenshots
 
 ## Licence 📃

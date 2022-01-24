@@ -60,6 +60,10 @@ app.delete('/api/notes/:id', (req, res) => { // :id is the query parameter
     });
 });
 //---------------------- HTML Routes ----------------------
+app.get('/', (req,res) => { //route to home page
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
 // GET /notes should return the notes.html file
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
