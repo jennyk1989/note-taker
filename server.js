@@ -1,10 +1,12 @@
+//import path & file sys packages
+const path = require('path');
+const fs = require('fs'); //file system package for reading & writing files
 //import Express package
 const express = require('express');
 const app = express();
 
-//import other packages
-const path = require('path');
-const fs = require('fs'); //file system package for reading & writing files
+// read db.json file and saved in notes object
+const { notes } = require("./db/db.json");
 
 //port (app to use environment variable (.env) if it's been set or default port to 3000)
 const PORT = process.env.PORT || 3000; 
@@ -15,28 +17,26 @@ app.use(express.json()); //takes incoming JSON data
 app.use(express.static('public')); //use to make files in public folder static
 
 //---------------------- API Routes ----------------------
-// read db.json file
-const { notesDB } = require("./db/db.json");
 
 // GET /api/notes:
 app.get('/api/notes', (req, res) => {
+    let notesDB = notes;
     // return all saved notes as JSON
-    res.json(notesDB); //response turned into JSON & saved in notes database
+    res.json(notesDB); // .json used to send JSON data
 });
 
 // POST /api/notes:
 app.post('/api/notes', (req, res) => {
     // receive new note to save on req.body
-    notesDB.push(req.body); //saves the new note in notes db by adding to the array
+    const newNote = req.body;
     // give each note a unique id when it's saved
-    req.params.id = req.params.id + 1; //length of notes will change with each new note so id will be unique
+    newNote.id = req.params.id + 1; //gets current id (req.parmas.id) and sequentially adds to it by adding 1
+    notes.push(newNote);
+    res.json(newNote);
     // add it to db.json file
-    fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notesDB), (err) => {
-        if (err) {
-            return console.log(err)
-        }
+    fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notes, null, 2), (err) => {
+        if (err) throw err;
     });
-    return newNote;
 });
 
 // DELETE /api/notes:
@@ -46,16 +46,18 @@ app.delete('/api/notes/:id', (req, res) => { // :id is the query parameter
     let notesFile = path.join(__dirname, './db/db.json'); 
     // remove the note with the given id property
     const deleteNote = req.params.id;
-    if (notesDB.id == deleteNote) {
-        const i = indexOf(notesDB);
-        notesDB.splice(i,1);
+    for (let i = 0; i < notes.length; i++) {
+        if (notes[i].id == deleteNote) {
+            notes.splice(i,1);
+            break;
+        }
     }
     // rewrite the notes to the db.json file
-    fs.writeFile(notesFile, JSON.stringify(notesDB), (err) => {
+    fs.writeFile(notesFile, JSON.stringify(notes, null, 2), (err) => {
         if (err) {
-            return console.log(err)
+            throw err;
         } else {
-            res.json(notesDB);
+            res.json(notes);
         }
     });
 });
