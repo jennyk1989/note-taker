@@ -30,7 +30,8 @@ app.post('/api/notes', (req, res) => {
     // receive new note to save on req.body
     const newNote = req.body;
     // give each note a unique id when it's saved
-    newNote.id = req.params.id + 1; //gets current id (req.parmas.id) and sequentially adds to it by adding 1
+    newNote.id = (notes.length).toString();
+    //req.params.id + 1; //gets current id (req.parmas.id) and sequentially adds to it by adding 1
     notes.push(newNote);
     res.json(newNote);
     // add it to db.json file
