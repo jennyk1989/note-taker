@@ -1,17 +1,17 @@
 [
   {
-    "title": "Test Title",
-    "text": "Test text",
-    "id": "1"
+    "title": "Bulma",
+    "text": "CSS framework",
+    "id": 1
   },
   {
-    "title": "Express.JS",
-    "text": "Framework for creating webservers",
-    "id": "2"
+    "title": "CSS",
+    "text": "styling language",
+    "id": 2
   },
   {
-    "title": "HTML",
-    "text": "markup language",
-    "id": "3"
+    "title": "Heroku",
+    "text": "cloud for application deployment",
+    "id": 3
   }
 ]

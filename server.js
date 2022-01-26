@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 
 // read db.json file and saved in notes object
-const { notes } = require("./db/db.json");
+const notes = require("./db/db.json");
 
 //port (app to use environment variable (.env) if it's been set or default port to 3000)
 const PORT = process.env.PORT || 3000; 
@@ -20,24 +20,23 @@ app.use(express.static('public')); //use to make files in public folder static
 
 // GET /api/notes:
 app.get('/api/notes', (req, res) => {
-    let notesDB = notes;
     // return all saved notes as JSON
-    res.json(notesDB); // .json used to send JSON data
+    res.json(notes); // .json used to send JSON data
 });
 
 // POST /api/notes:
 app.post('/api/notes', (req, res) => {
     // receive new note to save on req.body
-    const newNote = req.body;
+    let newNote = req.body;
     // give each note a unique id when it's saved
-    newNote.id = (notes.length).toString();
-    //req.params.id + 1; //gets current id (req.parmas.id) and sequentially adds to it by adding 1
+    let newNoteId = notes.length + 1; 
+    newNote.id = newNoteId + 1;
     notes.push(newNote);
-    res.json(newNote);
     // add it to db.json file
     fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notes, null, 2), (err) => {
         if (err) throw err;
     });
+    res.json(newNote);
 });
 
 // DELETE /api/notes:
