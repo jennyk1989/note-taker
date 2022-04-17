@@ -28,4 +28,4 @@ No contributions are being accepted at this time, thank you!
 No testing is available 
 ## Questions 🖐️
 Questions or concerns? </br>
-Find me on GitHub: [jennyk1989](https://github.com/jennyk1989)
+Find me on GitHub: [jennykeene](https://github.com/jennykeene)
